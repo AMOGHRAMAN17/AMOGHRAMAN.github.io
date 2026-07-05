@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amogh Raman — Data Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f1117;
+    --bg-card: #161b27;
+    --bg-card2: #1c2333;
+    --border: rgba(255,255,255,0.08);
+    --border-strong: rgba(255,255,255,0.14);
+    --text: #e8eaf0;
+    --text-secondary: #8b92a5;
+    --text-muted: #555d72;
+    --accent: #4f8ef7;
+    --accent-bg: rgba(79,142,247,0.10);
+    --accent-border: rgba(79,142,247,0.25);
+    --green: #3dd68c;
+    --green-bg: rgba(61,214,140,0.10);
+    --amber: #f5a623;
+    --amber-bg: rgba(245,166,35,0.10);
+    --radius: 10px;
+    --radius-lg: 14px;
+    --font: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 58px;
+  }
+  .nav-logo {
+    font-family: var(--mono); font-size: 14px; font-weight: 500;
+    color: var(--text);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 1.75rem; }
+  .nav-links a {
+    font-size: 13px; color: var(--text-secondary);
+    text-decoration: none; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* LAYOUT */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  .hero {
+    padding: 5.5rem 2rem 4rem;
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 130px; gap: 3rem; align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.06em; margin-bottom: 1.25rem;
+  }
+  .hero-name {
+    font-size: 48px; font-weight: 600; line-height: 1.1;
+    letter-spacing: -1.5px; margin-bottom: 1rem; color: #fff;
+  }
+  .hero-desc {
+    font-size: 15px; color: var(--text-secondary);
+    line-height: 1.75; margin-bottom: 2rem; max-width: 520px;
+  }
+  .hero-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 18px; border-radius: var(--radius);
+    font-size: 13px; font-weight: 500; text-decoration: none;
+    border: 1px solid var(--border-strong);
+    color: var(--text-secondary); background: var(--bg-card);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { background: #3a7de8; border-color: #3a7de8; color: #fff; }
+
+  .avatar {
+    width: 115px; height: 115px; border-radius: 50%;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px; font-weight: 600; color: var(--accent);
+    font-family: var(--mono);
+  }
+
+  /* METRICS */
+  .metrics {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+  }
+  .metrics-inner {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; divide: var(--border);
+  }
+  .metric {
+    text-align: center; padding: 0.5rem 1rem;
+    border-right: 1px solid var(--border);
+  }
+  .metric:last-child { border-right: none; }
+  .metric-num {
+    font-size: 30px; font-weight: 600; color: var(--accent);
+    font-family: var(--mono); line-height: 1;
+  }
+  .metric-label {
+    font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.4;
+  }
+
+  /* SECTIONS */
+  .section { padding: 3.5rem 0; }
+  .section + .section { border-top: 1px solid var(--border); }
+
+  .section-header {
+    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;
+  }
+  .section-label {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* EXPERIENCE */
+  .exp-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.75rem;
+  }
+  .exp-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+  .exp-company { font-size: 16px; font-weight: 600; color: #fff; }
+  .exp-role { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+  .exp-badge {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    padding: 4px 12px; border-radius: 20px;
+    background: var(--green-bg); color: var(--green);
+    border: 1px solid rgba(61,214,140,0.2); white-space: nowrap;
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 13.5px; color: var(--text-secondary); line-height: 1.7;
+    padding: 5px 0 5px 18px; position: relative;
+  }
+  .exp-bullets li::before {
+    content: ''; position: absolute; left: 0; top: 14px;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+    opacity: 0.6;
+  }
+  .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  }
+  .proj-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.5rem;
+    display: flex; flex-direction: column; transition: border-color 0.2s;
+  }
+  .proj-card:hover { border-color: var(--border-strong); }
+  .proj-card.featured {
+    grid-column: span 2;
+    border-color: var(--accent-border);
+  }
+  .proj-card.featured:hover { border-color: var(--accent); }
+  .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; }
+  .proj-name { font-size: 14px; font-weight: 600; color: #fff; }
+  .proj-link {
+    color: var(--text-muted); font-size: 16px; text-decoration: none; transition: color 0.15s;
+  }
+  .proj-link:hover { color: var(--accent); }
+  .proj-stats { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .pill {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 20px;
+    background: var(--accent-bg); color: var(--accent);
+    border: 1px solid var(--accent-border);
+  }
+  .pill.green {
+    background: var(--green-bg); color: var(--green);
+    border-color: rgba(61,214,140,0.2);
+  }
+  .proj-desc {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.7; flex: 1;
+    margin-bottom: 1rem;
+  }
+  .proj-stack { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .tag {
+    font-size: 11px; font-family: var(--mono);
+    padding: 3px 8px; border-radius: 5px;
+    background: var(--bg-card2); color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .skill-group {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.25rem;
+  }
+  .skill-group-title {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 0.875rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    font-size: 12px; padding: 4px 10px; border-radius: 5px;
+    background: var(--bg-card2); color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+
+  /* CERTS */
+  .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .cert-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .cert-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .cert-icon.gcp { background: var(--accent-bg); color: var(--accent); }
+  .cert-icon.java { background: rgba(245,100,80,0.12); color: #f56450; }
+  .cert-name { font-size: 13px; font-weight: 500; color: #fff; }
+  .cert-issuer { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* AWARDS */
+  .awards-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .award-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.1rem 1.25rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .award-icon {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    background: var(--amber-bg); color: var(--amber);
+    display: flex; align-items: center; justify-content: center; font-size: 17px;
+  }
+  .award-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .award-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* EDU */
+  .edu-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .edu-degree { font-size: 14px; font-weight: 600; color: #fff; }
+  .edu-school { font-size: 13px; color: var(--text-secondary); margin-top: 3px; }
+  .edu-grade {
+    font-family: var(--mono); font-size: 14px; font-weight: 500;
+    color: var(--accent); background: var(--accent-bg);
+    padding: 5px 14px; border-radius: 20px; border: 1px solid var(--accent-border);
+    white-space: nowrap;
+  }
+
+  /* CONTACT */
+  .contact-grid { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem; text-align: center;
+    font-size: 13px; color: var(--text-muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; padding: 3.5rem 1.5rem 2.5rem; }
+    .avatar { display: none; }
+    .metrics-inner { grid-template-columns: repeat(2, 1fr); }
+    .metric { border-right: none; border-bottom: 1px solid var(--border); padding: 0.75rem; }
+    .metric:nth-child(odd) { border-right: 1px solid var(--border); }
+    .metric:last-child { border-bottom: none; }
+    .projects-grid, .skills-grid, .cert-grid { grid-template-columns: 1fr; }
+    .proj-card.featured { grid-column: span 1; }
+    .nav-links { display: none; }
+    .hero-name { font-size: 34px; }
+    .container { padding: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">amogh<span>.</span>raman</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">// data_engineer · 3 yrs · hyderabad</div>
+    <div class="hero-name">Karavalakara<br>Amogh Raman</div>
+    <div class="hero-desc">
+      Building production-scale ETL/ELT pipelines and event-driven streaming systems for global banking infrastructure. Currently at HSBC processing 100M+ regulatory records daily across 5 jurisdictions.
+    </div>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="mailto:amoghraman25@gmail.com">
+        <i class="ti ti-mail"></i> Get in touch
+      </a>
+      <a class="btn" href="https://linkedin.com/in/amoghraman/" target="_blank">
+        <i class="ti ti-brand-linkedin"></i> LinkedIn
+      </a>
+      <a class="btn" href="https://github.com/AMOGHRAMAN17" target="_blank">
+        <i class="ti ti-brand-github"></i> GitHub
+      </a>
+    </div>
+  </div>
+  <div class="avatar">AR</div>
+</div>
+
+<div class="metrics">
+  <div class="metrics-inner">
+    <div class="metric">
+      <div class="metric-num">100M+</div>
+      <div class="metric-label">Daily records<br>processed</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">40%</div>
+      <div class="metric-label">Pipeline runtime<br>reduction</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">99.2%</div>
+      <div class="metric-label">SLA compliance<br>maintained</div>
+    </div>
+    <div class="metric">
+      <div class="metric-num">15 min</div>
+      <div class="metric-label">Deploy cycle<br>(from hours)</div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section" id="experience">
+    <div class="section-header">
+      <div class="section-label">Experience</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-top">
+        <div>
+          <div class="exp-company">HSBC</div>
+          <div class="exp-role">Software Engineer · Data Engineer · Magnus Regulatory ETL Platform</div>
+        </div>
+        <div class="exp-badge">Aug 2023 – Present</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Owned delivery of regulatory data pipelines across <strong>Basel III, IFRS-9, LCR, and NCCR RWA</strong> frameworks — 5 global jurisdictions (UK, HK, US, CA, HS).</li>
+        <li>Drove <strong>Apache Beam-to-Spark migration</strong> on 40M+ GLMA workloads — cutting execution time from <strong>4.5 to 2.7 hours (40%)</strong> while scaling platform to 100M+ daily records.</li>
+        <li>Architected multi-dependency <strong>Airflow DAGs</strong> for complex regulatory submission workflows, sustaining <strong>99.2% SLA compliance</strong> across global sites.</li>
+        <li>Engineered <strong>Jenkins/Groovy/Ansible CI/CD</strong> pipelines — reduced deployment cycle from hours to <strong>15 minutes</strong>, lowering release error rate by 20%.</li>
+        <li>Optimized SQL transformations and stored procedures, improving query execution speed by <strong>30%</strong> across regulatory workflows.</li>
+        <li>Integrated <strong>ServiceNow, Jenkins, and xMatters</strong> for automated alerting, reducing MTTD on platform failures.</li>
+        <li>Coordinated cross-pod PRB and release cadence governance across engineering teams.</li>
+        <li>Mentored <strong>2 junior engineers</strong> on Spark, Airflow, and Jenkins — accelerated onboarding and improved team throughput.</li>
+        <li>Led UAT and production release validation for regulatory and wholesale SDI workflows across 5 global sites.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="projects">
+    <div class="section-header">
+      <div class="section-label">Projects</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="proj-card featured">
+        <div class="proj-top">
+          <div class="proj-name">Real-Time Fraud Detection Pipeline</div>
+          <a class="proj-link" href="https://github.com/AMOGHRAMAN17" target="_blank">
+            <i class="ti ti-external-link"></i>
+          </a>
+        </div>
+        <div class="proj-stats">
+          <span class="pill">7K+ events processed</span>
+          <span class="pill green">6K+ fraud alerts</span>
+          <span class="pill">25 unit tests</span>
+          <span class="pill">3 risk tiers</span>
+        </div>
+        <div class="proj-desc">
+          Event-driven fraud detection platform using Apache Kafka with fault-tolerant consumers, DLQ patterns, and idempotent PostgreSQL writes. Spark Structured Streaming jobs generate real-time alerts. Configurable scoring engine targets transaction thresholds, velocity patterns, and location anomalies. Streamlit dashboards for live monitoring. Containerized with Docker, covered with pytest.
+        </div>
+        <div class="proj-stack">
+          <span class="tag">Apache Kafka</span>
+          <span class="tag">Spark Streaming</span>
+          <span class="tag">Python</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">pytest</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">Magnus Regulatory ETL Platform</div>
+        </div>
+        <div class="proj-stats">
+          <span class="pill">100M+ records/day</span>
+          <span class="pill green">40% faster</span>
+        </div>
+        <div class="proj-desc">
+          Java-based ETL components for Magnus platform modernization. Beam-to-Spark migration reducing runtime from 4.5 to 2.7 hours. SQL optimization achieving 30% execution improvement. CI/CD automation cutting deploy time to 15 minutes across environments.
+        </div>
+        <div class="proj-stack">
+          <span class="tag">Java</span>
+          <span class="tag">Apache Spark</span>
+          <span class="tag">Apache Beam</span>
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">Ansible</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <div class="proj-name">CI/CD Automation Framework</div>
+        </div>
+        <div class="proj-stats">
+          <span class="pill green">20% fewer release errors</span>
+        </div>
+        <div class="proj-desc">
+          Deployment automation using Python and Bash, eliminating manual validation steps across environments. ServiceNow and xMatters integration for automated incident alerting and platform stability monitoring.
+        </div>
+        <div class="proj-stack">
+          <span class="tag">Jenkins</span>
+          <span class="tag">Groovy</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">Bash</span>
+          <span class="tag">Python</span>
+          <span class="tag">ServiceNow</span>
+          <span class="tag">xMatters</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="skills">
+    <div class="section-header">
+      <div class="section-label">Skills</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Cloud & Analytics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">BigQuery</span>
+          <span class="skill-tag">Dataflow</span>
+          <span class="skill-tag">Cloud Composer</span>
+          <span class="skill-tag">GCS</span>
+          <span class="skill-tag">Dataproc</span>
+          <span class="skill-tag">Cloud SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Streaming & ETL</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Apache Kafka</span>
+          <span class="skill-tag">Spark Streaming</span>
+          <span class="skill-tag">Apache Beam</span>
+          <span class="skill-tag">Apache Spark</span>
+          <span class="skill-tag">Airflow</span>
+          <span class="skill-tag">Pub/Sub</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Groovy</span>
+          <span class="skill-tag">Bash</span>
+          <span class="skill-tag">Spring Boot</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">DevOps & Infra</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Jenkins</span>
+          <span class="skill-tag">Ansible</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Control-M</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">MS SQL Server</span>
+          <span class="skill-tag">Dremio</span>
+          <span class="skill-tag">Cloud SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Governance & Quality</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Schema Validation</span>
+          <span class="skill-tag">SLA Monitoring</span>
+          <span class="skill-tag">Structured Logging</span>
+          <span class="skill-tag">IAM</span>
+          <span class="skill-tag">Data Lineage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Certifications</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon gcp"><i class="ti ti-cloud"></i></div>
+        <div>
+          <div class="cert-name">Associate Cloud Engineer</div>
+          <div class="cert-issuer">Google Cloud Certified</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon java"><i class="ti ti-coffee"></i></div>
+        <div>
+          <div class="cert-name">Java SE 11 Developer</div>
+          <div class="cert-issuer">Oracle Certified Professional</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Awards</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="awards-list">
+      <div class="award-item">
+        <div class="award-icon"><i class="ti ti-award"></i></div>
+        <div>
+          <div class="award-name">HSBC HTI Pat on the Back Award</div>
+          <div class="award-sub">Q4 2024 · HSBC</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon"><i class="ti ti-medal"></i></div>
+        <div>
+          <div class="award-name">3rd Place — Secure Code Warrior League 2025</div>
+          <div class="award-sub">HSBC</div>
+        </div>
+      </div>
+      <div class="award-item">
+        <div class="award-icon"><i class="ti ti-medal"></i></div>
+        <div>
+          <div class="award-name">5th Place — Secure Code Warrior League 2024</div>
+          <div class="award-sub">HSBC</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-label">Education</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-card">
+      <div>
+        <div class="edu-degree">B.Tech — Electrical & Electronics Engineering</div>
+        <div class="edu-school">Jawaharlal Nehru Technological University (JNTU) · 2023</div>
+      </div>
+      <div class="edu-grade">8.95 / 10</div>
+    </div>
+  </div>
+
+  <div class="section" id="contact">
+    <div class="section-header">
+      <div class="section-label">Contact</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <a class="btn" href="mailto:amoghraman25@gmail.com">
+        <i class="ti ti-mail"></i> amoghraman25@gmail.com
+      </a>
+      <a class="btn" href="tel:+917893836805">
+        <i class="ti ti-phone"></i> +91 78938 36805
+      </a>
+      <a class="btn" href="https://linkedin.com/in/amoghraman/" target="_blank">
+        <i class="ti ti-brand-linkedin"></i> linkedin.com/in/amoghraman
+      </a>
+      <a class="btn" href="https://github.com/AMOGHRAMAN17" target="_blank">
+        <i class="ti ti-brand-github"></i> github.com/AMOGHRAMAN17
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Karavalakara Amogh Raman · Data Engineer · Hyderabad, India ·
+  <a href="mailto:amoghraman25@gmail.com">amoghraman25@gmail.com</a>
+</footer>
+
+</body>
+</html>
